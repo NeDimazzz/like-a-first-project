@@ -1,31 +1,39 @@
-class Warrior ():
-    def __init__(self, name, power, endurance, hair_color):
-        self.name = name
+#Создай класс Task, который позволяет управлять задачами (делами).
+#У задачи должны быть атрибуты: описание задачи, срок выполнения
+#и статус (выполнено/не выполнено). Реализуй функцию для добавления задач,
+#отметки выполненных задач и вывода списка текущих (не выполненных) задач.
 
-        self.power = power
+class Task ():
+    def __init__(self):
+        self.tasks = []
 
-        self.endurance = endurance
+    def add(self, time, description):
 
-        self.hair_color = hair_color
+        self.tasks.append({'time': time, 'description' : description,
+                           'status' : 'не выполнено'})
 
-    def sleep(self):
-        print(f"{self.name} лег спать")
-        self.endurance += 2
 
-    def eat(self):
-        print(f"{self.name} сел кушать")
-        self.power += 1
-
-    def hit(self):
-        print(f"{self.name} бьет кого-то")
-        self.endurance -= 6
-
-    def walk(self):
-        print(f"{self.name} гуляет")
+    def complite(self, description ):
+        for task in self.tasks:
+            if task['description']  == description:
+                task['status'] = 'выполнено'
+                print(f'задача {description} : выполнено')
+            else:
+                print(f'задача {description} : не найдена')
 
     def info(self):
-        print(f"имя воина - {self.name}")
+        print(f'текущие задачи')
+        for task in self.tasks:
+            if task['status']  == 'не выполнено':
+                print(f' {task['description']} - {task['time']}')
 
-    print(f"цвет волос воина - {self.hair_color}")
-    print(f"сила воина - {self.power}")
-    print(f"выносливость воина - {self.endurance}")
+t = Task()
+t.add('01.07.2025','Купить книгу')
+t.add('10.07.2025','Прочитать Книгу')
+t.add('21.07.2025','Использовать книгу')
+
+t.info()
+
+t.complite('Купить книгу')
+
+t.info()
